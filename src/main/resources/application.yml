@@ -1,0 +1,28 @@
+catalog:
+  db:
+    path: ./data/work/catalog.db
+  import:
+    max-body-size: 5MB
+    max-records: 5000
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: ${catalog.import.max-body-size}
+      max-request-size: ${catalog.import.max-body-size}
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+
+management:
+  health:
+    db:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics

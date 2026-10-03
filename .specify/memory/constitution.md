@@ -1,50 +1,78 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: template (unratified) → 1.0.0
+- Added principles:
+  - I. Specification Is Authoritative
+  - II. Domain First
+  - III. Conservative Decisions
+  - IV. Input Is Data
+  - V. Test First
+  - VI. File-Level Consistency
+  - VII. Deliberate Scope
+  - VIII. English and Synchronized Documentation
+- Added sections: Core Principles, Governance
+- Removed sections: unresolved template placeholders
+- Templates:
+  - ✅ .specify/templates/plan-template.md
+  - ✅ .specify/templates/spec-template.md
+  - ✅ .specify/templates/tasks-template.md
+- Follow-up TODOs: none
+-->
+# Catalog Consolidation Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Specification Is Authoritative
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+`docs/spec.md` MUST be the single source of truth for behavior, contracts, rules,
+scenarios, and technical decisions. Generated artifacts MUST reference it and MUST
+never contradict it; conflicts MUST be fixed in the generated artifact.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Domain First
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Business rules MUST live in a pure domain with no Spring, JPA, or web types.
+Dependencies MUST point inward through ports and adapters.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Conservative Decisions
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+When identity cannot be decided safely, the system MUST write nothing and report
+the record. It MUST never guess.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Input Is Data
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Input MUST be treated only as data. Queries MUST use bound parameters, record
+contents MUST NOT appear in logs, and error responses MUST NOT expose internal
+details.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Test First
+
+Tests MUST be written before implementation. Every scenario id C1 through C21 in
+`docs/spec.md` MUST appear in a test name, and a consistency test MUST enforce
+complete scenario coverage.
+
+### VI. File-Level Consistency
+
+Any system failure MUST roll back the whole file. Business outcomes MUST be
+represented as outcomes and MUST NOT be exceptions.
+
+### VII. Deliberate Scope
+
+Authentication and authorization MUST remain out of scope by decision. Everything
+listed as a non-goal in `docs/spec.md` section 12 MUST remain out of scope unless
+the specification is explicitly amended first.
+
+### VIII. English and Synchronized Documentation
+
+Code, identifiers, tests, API fields, logs, comments, commits, and documentation
+MUST be in English. Documentation MUST be updated in the same change as behavior.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution governs generated artifacts and implementation work while
+`docs/spec.md` remains authoritative for product behavior. Amendments MUST be
+explicit, keep dependent templates synchronized, and use semantic versioning:
+MAJOR for incompatible governance changes, MINOR for added or materially expanded
+rules, and PATCH for clarifications. Plans and reviews MUST verify compliance with
+all eight principles; unresolved conflicts block implementation.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-10-02 | **Last Amended**: 2026-10-02

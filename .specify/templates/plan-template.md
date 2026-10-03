@@ -40,7 +40,22 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- **Specification authority**: The plan references `docs/spec.md` and contains no
+  conflicting behavior, contract, rule, scenario, or technical decision.
+- **Domain first**: Business rules remain in a pure domain and dependencies point
+  inward through ports and adapters.
+- **Conservative decisions**: Unsafe identity decisions write nothing and are
+  reported; the design never guesses.
+- **Input safety**: Input remains data, persistence uses bound parameters, logs
+  exclude record contents, and error responses exclude internal details.
+- **Test first**: Tests precede implementation; C1 through C21 appear in test
+  names and a consistency test enforces complete coverage.
+- **File consistency**: System failures roll back the whole file and business
+  outcomes are not exceptions.
+- **Deliberate scope**: Authentication, authorization, and all section 12
+  non-goals remain excluded.
+- **Language and documentation**: Everything is in English and documentation is
+  updated in the same change as behavior.
 
 ## Project Structure
 
